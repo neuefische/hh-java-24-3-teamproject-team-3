@@ -4,9 +4,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProductService {
-    private final ProductService productService;
+    private final ProductRepository productRepository;
 
-    public ProductService(ProductService productService) {
-        this.productService = productService;
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 }
