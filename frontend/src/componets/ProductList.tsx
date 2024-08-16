@@ -20,7 +20,7 @@ export default function ProductList() {
             <h1>Einkaufsliste</h1>
             <ul>
                 {products.map(product => (
-                    <li key={product.id}>{product.name} - Menge: {product.ammount}</li>
+                    <li key={product.id}>{product.name} - Menge: {product.amount}</li>
                 ))}
             </ul>
         </div>
