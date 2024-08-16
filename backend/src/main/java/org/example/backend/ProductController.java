@@ -1,14 +1,19 @@
 package org.example.backend;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+@RequiredArgsConstructor
 @RestController
-@RequestMapping
+@RequestMapping("/api/products")
 public class ProductController {
     private final ProductService productService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
+    @GetMapping
+    public List<Product> getAllGroceries() {
+        return productService.findAllGroceries();
     }
 }
