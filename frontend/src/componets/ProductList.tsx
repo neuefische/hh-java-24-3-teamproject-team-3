@@ -6,7 +6,7 @@ export default function ProductList() {
     const [products, setProducts] = useState<Product[]>([]); // Verwende den Typ für die State-Variable
 
     useEffect(() => {
-        axios.get<Product[]>('http://localhost:8080/api/products')
+        axios.get<Product[]>('api/products')
             .then(response => {
                 setProducts(response.data);
             })

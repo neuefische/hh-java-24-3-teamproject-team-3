@@ -17,4 +17,7 @@ public class ProductService {
     }
 
 
+    public Product findGroceriesById(String id) {
+     return productRepository.getById(id);
+    }
 }
