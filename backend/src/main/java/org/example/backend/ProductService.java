@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @RequiredArgsConstructor
@@ -18,6 +19,7 @@ public class ProductService {
 
 
     public Product findGroceriesById(String id) {
-     return productRepository.getById(id);
+     return productRepository.findById(id)
+             .orElseThrow(() -> new NoSuchElementException("Product with id: " + id + " not found!"));
     }
 }
