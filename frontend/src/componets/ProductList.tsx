@@ -15,12 +15,26 @@ export default function ProductList() {
             });
     }, []);
 
+    function deleteThisItem(id:string){
+        axios.delete("/api/products/" + id)
+        .then(() => {axios.get<Product[]>('api/products')
+            .then(response => {
+                setProducts(response.data);
+            })
+            .catch(error => {
+                console.error("Es gab einen Fehler beim Abrufen der Daten!", error);
+            });})
+
+    }
+
     return (
         <div>
             <h1>Einkaufsliste</h1>
             <ul>
                 {products.map(product => (
-                    <li key={product.id}>{product.name} - Menge: {product.amount}</li>
+                    <li key={product.id}>{product.name} - Menge: {product.amount}
+                        <button onClick={()=>deleteThisItem(product.id)}> Produkt löschen</button>
+                    </li>
                 ))}
             </ul>
         </div>
