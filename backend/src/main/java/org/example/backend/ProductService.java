@@ -11,6 +11,10 @@ import java.util.List;
 public class ProductService {
     private final ProductRepository productRepository;
 
+    public void deletebyid(String id) {
+        productRepository.deleteById(id);
+    }
+
 
     public List<Product> findAllGroceries(){
         return productRepository.findAll();

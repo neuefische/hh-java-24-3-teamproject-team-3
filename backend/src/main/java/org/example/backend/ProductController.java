@@ -1,9 +1,7 @@
 package org.example.backend;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RequiredArgsConstructor
@@ -16,4 +14,10 @@ public class ProductController {
     public List<Product> getAllGroceries() {
         return productService.findAllGroceries();
     }
-}
+
+    @DeleteMapping("{id}")
+    void delete(@PathVariable String id) {
+        productService.deletebyid(id);
+    }}
+
+
