@@ -5,11 +5,11 @@ import ProductList from "./components/ProductList.tsx";
 function App() {
 
     return (
-        <>
-            <h1>Groceries app</h1>
+        <div className="root-container">
+            <h1 className="heading">Groceries app</h1>
             <ProductList/>
 
-        </>
+        </div>
     )
 }
 

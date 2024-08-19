@@ -20,9 +20,9 @@ export default function ProductList() {
 
     return (
         <div>
-            <h1>Einkaufsliste</h1>
+            <h2 className="sub-heading">Einkaufsliste</h2>
             <GetGroceriesById products={products}/>
-            <div>
+            <div className="list-card">
                 {products.map(product => (
                     <ProductCard key={product.id} product={product} />
                 ))}
