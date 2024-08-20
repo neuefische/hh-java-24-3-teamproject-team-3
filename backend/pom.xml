@@ -68,8 +68,8 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
+        <finalName>groceries-app</finalName>
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>
