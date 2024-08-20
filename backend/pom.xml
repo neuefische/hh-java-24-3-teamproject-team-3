@@ -69,6 +69,7 @@
     </dependencies>
 
     <build>
+        <finalName>backend-0.0.1-SNAPSHOT</finalName>
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>
