@@ -3,7 +3,7 @@ name: "grocery app"
 on:
   push:
     branches:
-      - docker-test
+      - feat/docker-test
 
 jobs:
   build-frontend:
