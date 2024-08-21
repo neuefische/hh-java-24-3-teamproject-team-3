@@ -1,4 +1,4 @@
-name: "Deploy App"
+name: "grocery app"
 
 on:
   push:
@@ -40,7 +40,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '21' # must match the version in the pom.xml
+          java-version: '21'
           distribution: 'temurin'
           cache: 'maven'
 
@@ -50,7 +50,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: app.jar
-          path: backend/target/backend-0.0.1-SNAPSHOT.jar # must match the finalName in the pom.xml
+          path: backend/target/groceries-app.jar
 
   push-to-docker-hub:
     runs-on: ubuntu-latest
@@ -66,14 +66,14 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }} # must match the name of the Dockerhub account
-          password: ${{ secrets.DOCKERHUB_PASSWORD }} # must match the password of the Dockerhub account
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_TAG }} # Example: username/project:latest
+          tags: ${{ secrets.DOCKERHUB_TAG }}
           context: .
 
   deploy:
@@ -81,9 +81,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: push-to-docker-hub
     environment:
-      name: Capstone Project # Capstone Project name
-      url: https://neuefische.de/ # Link to deployment
+      name: team-project
+      url: https://groceries-app-bsu2.onrender.com/
     steps:
       - name: Trigger Render.com Deployment
         run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY }} #muss mit der url des Render Deployments übereinstimmen
+          curl -X POST ${{ secrets.RENDER_DEPLOY }}

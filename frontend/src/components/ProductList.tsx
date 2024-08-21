@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react';
+
 import axios from 'axios';
 import { Product } from '../models/product.tsx';
+import GetGroceriesById from "./GetGroceriesById.tsx";
+import ProductCard from "./ProductCard.tsx";
+import {useEffect, useState} from "react";
 
 export default function ProductList() {
     const [products, setProducts] = useState<Product[]>([]); // Verwende den Typ für die State-Variable
 
     useEffect(() => {
-        axios.get<Product[]>('api/products')
+        axios.get<Product[]>('/api/products')
             .then(response => {
                 setProducts(response.data);
             })
@@ -29,16 +32,20 @@ export default function ProductList() {
 
     return (
         <div>
-            <h1>Einkaufsliste</h1>
-            <ul>
+            <h2 className="sub-heading">Einkaufsliste</h2>
+            <GetGroceriesById products={products}/>
+            <div className="list-card">
                 {products.map(product => (
                     <li key={product.id}>{product.name} - Menge: {product.amount}
-                        <button onClick={()=>deleteThisItem(product.id)}> Produkt löschen</button>
+                <ProductCard key={product.id} product={product} />
+                <button onClick={()=>deleteThisItem(product.id)}> Produkt löschen</button>
                     </li>
                 ))}
-            </ul>
+            </div>
+
         </div>
     );
 }
+
 
 

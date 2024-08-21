@@ -11,6 +11,7 @@
     <groupId>org.example</groupId>
     <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <name>backend</name>
     <description>backend</description>
     <url/>
@@ -67,9 +68,8 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
-        <finalName>backend-0.0.1-SNAPSHOT</finalName>
+        <finalName>groceries-app</finalName>
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>
