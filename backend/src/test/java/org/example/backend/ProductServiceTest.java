@@ -45,6 +45,12 @@ class ProductServiceTest {
         verify(productRepository).save(saveProduct);
         assertEquals(expected, actual);
     }
+    @Test
+    void deleteProduct_Test() {
+        doNothing().when(productRepository).deleteById("2");
+        productService.deleteById("2");
+        verify(productRepository).deleteById("2");
+  }
         @Test
         void findGroceriesById() {
             //GIVEN

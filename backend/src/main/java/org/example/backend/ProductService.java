@@ -13,6 +13,10 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final IdService idService;
 
+    public void deletebyid(String id) {
+        productRepository.deleteById(id);
+    }
+
 
     public List<Product> findAllGroceries(){
         return productRepository.findAll();
