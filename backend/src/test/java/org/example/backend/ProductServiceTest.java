@@ -1,7 +1,6 @@
 package org.example.backend;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -9,8 +8,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class ProductServiceTest {
+
+    IdService idService = mock(IdService.class);
     ProductRepository productRepository = mock(ProductRepository.class);
-    ProductService productService = new ProductService(productRepository);
+    ProductService productService = new ProductService(productRepository, idService);
+
 
     @Test
     void findAllGroceries() {
@@ -27,17 +29,32 @@ class ProductServiceTest {
         verify(productRepository).findAll();
         assertEquals(products, actual);
     }
-
     @Test
-    void findGroceriesById() {
-        //GIVEN
-        String id = "4";
-        Product product = new Product("4","apple", 7);
-        when(productRepository.findById(id)).thenReturn(Optional.of(product));
-        //WHEN
-        Product actual = productService.findGroceriesById(id);
-        //THEN
-        verify(productRepository).findById(id);
-        assertEquals(product, actual);
+    void addProdukt() {
+        // GIVEN
+        NewProduct newProduct = new NewProduct("Orangen", 5);
+        Product saveProduct = new Product(idService.randomId(), newProduct.name(), newProduct.amount());
+        when(productRepository.save(saveProduct)).thenReturn(saveProduct);
+        when(idService.randomId()).thenReturn(saveProduct.id());
+
+        // WHEN
+        Product actual = productService.saveProduct(newProduct);
+
+        // THEN
+        Product expected = new Product(idService.randomId(), newProduct.name(), newProduct.amount());
+        verify(productRepository).save(saveProduct);
+        assertEquals(expected, actual);
+    }
+        @Test
+        void findGroceriesById() {
+            //GIVEN
+            String id = "4";
+            Product product = new Product("4","apple", 7);
+            when(productRepository.findById(id)).thenReturn(Optional.of(product));
+            //WHEN
+            Product actual = productService.findGroceriesById(id);
+            //THEN
+            verify(productRepository).findById(id);
+            assertEquals(product, actual);
     }
 }

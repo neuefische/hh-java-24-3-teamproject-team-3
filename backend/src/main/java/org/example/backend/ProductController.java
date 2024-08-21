@@ -1,12 +1,10 @@
 package org.example.backend;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/products")
@@ -16,6 +14,11 @@ public class ProductController {
     @GetMapping
     public List<Product> getAllGroceries() {
         return productService.findAllGroceries();
+    }
+
+    @PostMapping
+    public Product saveProduct(@RequestBody NewProduct newProduct) {
+        return productService.saveProduct(newProduct);
     }
    @GetMapping("{id}")
     public Product getGroceryProductById(@PathVariable String id){
