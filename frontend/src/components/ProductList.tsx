@@ -18,13 +18,28 @@ export default function ProductList() {
             });
     }, []);
 
+    function deleteThisItem(id:string){
+        axios.delete("/api/products/" + id)
+        .then(() => {axios.get<Product[]>('api/products')
+            .then(response => {
+                setProducts(response.data);
+            })
+            .catch(error => {
+                console.error("Es gab einen Fehler beim Abrufen der Daten!", error);
+            });})
+
+    }
+
     return (
         <div>
             <h2 className="sub-heading">Einkaufsliste</h2>
             <GetGroceriesById products={products}/>
             <div className="list-card">
                 {products.map(product => (
-                    <ProductCard key={product.id} product={product} />
+                    <li key={product.id}>{product.name} - Menge: {product.amount}
+                <ProductCard key={product.id} product={product} />
+                <button onClick={()=>deleteThisItem(product.id)}> Produkt löschen</button>
+                    </li>
                 ))}
             </div>
 

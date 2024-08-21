@@ -2,7 +2,10 @@
 import './App.css'
 import ProductList from "./components/ProductList.tsx";
 
-function App() {
+
+
+export default function App() {
+
 
     return (
         <div className="root-container">
@@ -13,4 +16,3 @@ function App() {
     )
 }
 
-export default App

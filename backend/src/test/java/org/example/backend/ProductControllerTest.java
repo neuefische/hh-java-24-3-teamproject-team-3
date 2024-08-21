@@ -34,6 +34,20 @@ class ProductControllerTest {
                             []
                         """));
     }
+    @Test
+    void deletebyid() throws Exception {
+        //Given
+        productRepository.save(new Product("2", "banane", 2));
+        //When
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/products/2"))
+                //Then
+                .andExpect(status().isOk());
+
+
+
+
+
+    }
 
     @Test
     @DirtiesContext
