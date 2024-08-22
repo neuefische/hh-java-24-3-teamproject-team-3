@@ -16,7 +16,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product saveProduct(@RequestBody NewProduct newProduct) {
+    public Product AddProduct(@RequestBody NewProduct newProduct) {
         return productService.saveProduct(newProduct);
     }
 
@@ -24,7 +24,6 @@ public class ProductController {
     void delete(@PathVariable String id) {
         productService.deletebyid(id);
     }
-
 
    @GetMapping("{id}")
     public Product getGroceryProductById(@PathVariable String id){
