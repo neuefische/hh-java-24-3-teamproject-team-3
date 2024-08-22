@@ -26,7 +26,7 @@ body{
   text-align: center;
 }
 .search-card{
-background-color: darkgray;
+  background-color: darkgray;
   padding: 1.2rem;
 }
 
@@ -100,4 +100,3 @@ background-color: darkgray;
   background-color: #f8f8f8;
   border-radius: 10px;
 }
-
