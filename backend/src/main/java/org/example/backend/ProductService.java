@@ -28,10 +28,9 @@ public class ProductService {
              .orElseThrow(() -> new NoSuchElementException("Product with id: " + id + " not found!"));
     }
     public Product updateProduct(ProductDTO updateProduct, String id) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new NoSuchElementException(("No book found with id: " + id))
-                .withid(updateProduct).id())
-                .withname(updateProduct.name())
-                .withamount(updateProduct.amount());
+        Product product = productRepository.findById(id).orElseThrow(() -> new NoSuchElementException(("No product found with id: " + id)))
+                .withName(updateProduct.name())
+                .withAmount(updateProduct.amount());
         return productRepository.save(product);
     }
 

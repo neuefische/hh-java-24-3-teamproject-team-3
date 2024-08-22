@@ -30,9 +30,9 @@ public class ProductController {
         return productService.findGroceriesById(id);
    }
 
-    @PutMapping(path = {"{id}/update", "{id}"})
-    public Product update(@PathVariable String id, @RequestBody ProductPut productPut) {
-        return productService.updateProduct(productPut, id);
+    @PutMapping(path = { "{id}"})
+    public Product update(@PathVariable String id, @RequestBody ProductDTO productDTO) {
+        return productService.updateProduct(productDTO, id);
     }
 
 }
