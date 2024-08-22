@@ -2,7 +2,7 @@ import { Product } from "../models/product.tsx";
 
 type ProductCardProps = {
     product: Product;
-};
+}
 
 export default function ProductCard(props: Readonly<ProductCardProps>) {
     return (
@@ -12,5 +12,5 @@ export default function ProductCard(props: Readonly<ProductCardProps>) {
                 <p>Menge: {props.product.amount}</p>
             </div>
         </div>
-    );
+    )
 }

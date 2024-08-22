@@ -1,51 +1,51 @@
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { Product } from "../models/product.tsx"
+import GetGroceriesById from "./GetGroceriesById.tsx"
+import ProductCard from "./ProductCard.tsx"
+import AddProduct from "./AddProduсt.tsx"
 
-import axios from 'axios';
-import { Product } from '../models/product.tsx';
-import GetGroceriesById from "./GetGroceriesById.tsx";
-import ProductCard from "./ProductCard.tsx";
-import {useEffect, useState} from "react";
+
 
 export default function ProductList() {
-    const [products, setProducts] = useState<Product[]>([]); // Verwende den Typ für die State-Variable
+    const [products, setProducts] = useState<Product[]>([])
 
-    useEffect(() => {
+    const fetchProducts = () => {
         axios.get<Product[]>('/api/products')
             .then(response => {
-                setProducts(response.data);
+                setProducts(response.data)
             })
             .catch(error => {
                 console.error("Es gab einen Fehler beim Abrufen der Daten!", error);
-            });
-    }, []);
+            })
+    }
 
-    function deleteThisItem(id:string){
+    useEffect(() => {
+        fetchProducts()
+    }, [])
+
+    function deleteThisItem(id: string) {
         axios.delete("/api/products/" + id)
-        .then(() => {axios.get<Product[]>('api/products')
-            .then(response => {
-                setProducts(response.data);
-            })
+            .then(() => fetchProducts())
             .catch(error => {
-                console.error("Es gab einen Fehler beim Abrufen der Daten!", error);
-            });})
-
+                console.error("Es ist ein Problem aufgetreten!", error)
+            })
     }
 
     return (
         <div>
             <h2 className="sub-heading">Einkaufsliste</h2>
-            <GetGroceriesById products={products}/>
+            <AddProduct productAdd={fetchProducts} />
+            <GetGroceriesById products={products} />
             <div className="list-card">
                 {products.map(product => (
                     <li key={product.id}>{product.name} - Menge: {product.amount}
-                <ProductCard key={product.id} product={product} />
-                <button onClick={()=>deleteThisItem(product.id)}> Produkt löschen</button>
+                        <ProductCard key={product.id} product={product}/>
+                        <button onClick={() => deleteThisItem(product.id)}> Produkt löschen</button>
                     </li>
                 ))}
             </div>
-
         </div>
     );
 }
-
-
 

@@ -44,11 +44,6 @@ class ProductControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/products/2"))
                 //Then
                 .andExpect(status().isOk());
-
-
-
-
-
     }
 
     @Test
@@ -65,7 +60,7 @@ class ProductControllerTest {
             "amount": 1
        }
        """))
-        //THEN
+              //THEN
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.name").value("Milch"))
