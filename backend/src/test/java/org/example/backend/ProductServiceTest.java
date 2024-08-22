@@ -45,16 +45,23 @@ class ProductServiceTest {
         verify(productRepository).save(saveProduct);
         assertEquals(expected, actual);
     }
-        @Test
-        void findGroceriesById() {
-            //GIVEN
-            String id = "4";
-            Product product = new Product("4","apple", 7);
-            when(productRepository.findById(id)).thenReturn(Optional.of(product));
-            //WHEN
-            Product actual = productService.findGroceriesById(id);
-            //THEN
-            verify(productRepository).findById(id);
-            assertEquals(product, actual);
+    @Test
+    void deleteProduct_Test() {
+        doNothing().when(productRepository).deleteById("2");
+        productService.deletebyid("2");
+        verify(productRepository).deleteById("2");
+    }
+
+    @Test
+    void findGroceriesById() {
+        //GIVEN
+        String id = "4";
+        Product product = new Product("4","apple", 7);
+        when(productRepository.findById(id)).thenReturn(Optional.of(product));
+        //WHEN
+        Product actual = productService.findGroceriesById(id);
+        //THEN
+        verify(productRepository).findById(id);
+        assertEquals(product, actual);
     }
 }

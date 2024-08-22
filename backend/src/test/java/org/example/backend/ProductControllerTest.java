@@ -45,7 +45,6 @@ class ProductControllerTest {
                 //Then
                 .andExpect(status().isOk());
     }
-
     @Test
     @DirtiesContext
     void addNewProduct() throws Exception {
@@ -60,7 +59,7 @@ class ProductControllerTest {
             "amount": 1
        }
        """))
-              //THEN
+        //THEN
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.name").value("Milch"))
