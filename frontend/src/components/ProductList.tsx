@@ -6,7 +6,8 @@ import ProductCard from "./ProductCard.tsx";
 import {useEffect, useState} from "react";
 
 export default function ProductList() {
-    const [products, setProducts] = useState<Product[]>([]); // Verwende den Typ für die State-Variable
+    const [products, setProducts] = useState<Product[]>([]);
+
 
 
     function fetchData() {
@@ -32,7 +33,7 @@ export default function ProductList() {
             <div className="list-card">
                 {products.map(product => (
                     <li key={product.id}>{product.name} - Menge: {product.amount}
-                        <ProductCard key={product.id} product={product} fetchData={fetchData()}/>
+                        <ProductCard key={product.id} product={product} fetchData={fetchData} initialFetchData={fetchData}/>
 
                     </li>
                 ))}

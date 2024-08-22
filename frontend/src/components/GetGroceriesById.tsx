@@ -38,7 +38,7 @@ export default function GetGroceriesById(props: Readonly<GetGroceriesByIdProps>)
                 <div className="product-by-id">
                     <div>Found article(s):</div>
                     {filteredProducts.map(product => (
-                        <ProductCard key={product.id} product={product} />
+                        <ProductCard key={product.id} product={product} fetchData={()=>{}} initialFetchData={()=>{}}/>
                     ))}
                 </div>
             ) : noProductsMessage}
