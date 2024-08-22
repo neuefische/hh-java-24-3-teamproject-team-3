@@ -3,6 +3,7 @@ package org.example.backend;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -25,6 +26,13 @@ public class ProductService {
     public Product findGroceriesById(String id) {
      return productRepository.findById(id)
              .orElseThrow(() -> new NoSuchElementException("Product with id: " + id + " not found!"));
+    }
+    public Product updateProduct(ProductDTO updateProduct, String id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new NoSuchElementException(("No book found with id: " + id))
+                .withid(updateProduct).id())
+                .withname(updateProduct.name())
+                .withamount(updateProduct.amount());
+        return productRepository.save(product);
     }
 
 
