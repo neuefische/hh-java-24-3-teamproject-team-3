@@ -8,7 +8,8 @@ import {useEffect, useState} from "react";
 export default function ProductList() {
     const [products, setProducts] = useState<Product[]>([]); // Verwende den Typ für die State-Variable
 
-    useEffect(() => {
+
+    function fetchData() {
         axios.get<Product[]>('/api/products')
             .then(response => {
                 setProducts(response.data);
@@ -16,19 +17,13 @@ export default function ProductList() {
             .catch(error => {
                 console.error("Es gab einen Fehler beim Abrufen der Daten!", error);
             });
+    }
+
+    useEffect(() => {
+        fetchData()
     }, []);
 
-    function deleteThisItem(id:string){
-        axios.delete("/api/products/" + id)
-        .then(() => {axios.get<Product[]>('api/products')
-            .then(response => {
-                setProducts(response.data);
-            })
-            .catch(error => {
-                console.error("Es gab einen Fehler beim Abrufen der Daten!", error);
-            });})
 
-    }
 
     return (
         <div>
@@ -37,8 +32,8 @@ export default function ProductList() {
             <div className="list-card">
                 {products.map(product => (
                     <li key={product.id}>{product.name} - Menge: {product.amount}
-                <ProductCard key={product.id} product={product} />
-                <button onClick={()=>deleteThisItem(product.id)}> Produkt löschen</button>
+                        <ProductCard key={product.id} product={product} fetchData={fetchData()}/>
+
                     </li>
                 ))}
             </div>
