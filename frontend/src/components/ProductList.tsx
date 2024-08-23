@@ -7,9 +7,6 @@ import {useEffect, useState} from "react";
 
 export default function ProductList() {
     const [products, setProducts] = useState<Product[]>([]);
-
-
-
     function fetchData() {
         axios.get<Product[]>('/api/products')
             .then(response => {
@@ -19,13 +16,9 @@ export default function ProductList() {
                 console.error("Es gab einen Fehler beim Abrufen der Daten!", error);
             });
     }
-
     useEffect(() => {
         fetchData()
     }, []);
-
-
-
     return (
         <div>
             <h2 className="sub-heading">Einkaufsliste</h2>
@@ -33,12 +26,11 @@ export default function ProductList() {
             <div className="list-card">
                 {products.map(product => (
                     <li key={product.id}>{product.name} - Menge: {product.amount}
-                        <ProductCard key={product.id} product={product} fetchData={fetchData} initialFetchData={fetchData}/>
-
+                        <ProductCard key={product.id} product={product}
+                                     fetchData={fetchData} />
                     </li>
                 ))}
             </div>
-
         </div>
     );
 }

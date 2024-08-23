@@ -4,9 +4,7 @@ import {useState} from "react";
 
 type ProductCardProps = {
     product: Product;
-    initialFetchData: () => void;
     fetchData: () => void;
-
 };
 
 export default function ProductCard(props: Readonly<ProductCardProps>) {
@@ -44,14 +42,13 @@ export default function ProductCard(props: Readonly<ProductCardProps>) {
     function toggleEditModus() {
         setIsInEditmode(!isInEditMode)
     }
-
-
-
     return (
         <div className="product-card">
             <div className="product-card-info">
-                {isInEditMode ? <input type="text" value={name} onChange={(event)=>setName(event.target.value)}/> : <h3>{props.product.name}</h3>}
-                {isInEditMode ? <input type="number" value={amount} onChange={(event)=>setAmount(parseInt(event.target.value))}/> : <h3>{props.product.amount}</h3>}
+                {isInEditMode ? <input type="text" value={name} onChange={(event) =>setName(event.target.value)}/>
+                    : <h3>{props.product.name}</h3>}
+                {isInEditMode ? <input type="number" value={amount} onChange={(event)=>setAmount(event.target.valueAsNumber)}/>
+                    : <h3>{props.product.amount}</h3>}
                 <p>Menge: {props.product.amount}</p>
             </div>
             <button onClick={() => deleteThisItem(props.product.id)}> Produkt löschen</button>
